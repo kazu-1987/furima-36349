@@ -70,5 +70,18 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include('Price Out of setting range')
     end
+    it 'userが紐付いていないと保存できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include('User must exist')
+    end
+    it 'imageが空では保存できない'do
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Image can't be blank")
+    end
+    it "全てが入力されていれば保存できる" do
+      expect(@item).to be_valid
+    end
   end
 end
