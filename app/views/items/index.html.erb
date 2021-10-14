@@ -130,10 +130,10 @@
 
   <% if @items.present? %>
     <% @items.each do |item| %>
-      <li class='list'>
-        <%# link_to items_path(item.id) do %>
-        <div class='item-img-content'>
-          <%= image_tag item.image, class: "item-img" %>
+    <li class='list'>
+      <%= link_to item_path(item.id),method: :get do %>
+      <div class='item-img-content'>
+        <%= image_tag item.image, class: "item-img" %>
 
         <% if @item.present? %>
           <div class='sold-out'>
@@ -153,7 +153,7 @@
               <span class='star-count'>0</span>
             </div>
           </div>
-        <%# end %>
+        <% end %>
       </div>
     <% end %>
       </li>
