@@ -1,0 +1,2 @@
+module OrderAddresesHelper
+end
