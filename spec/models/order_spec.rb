@@ -5,6 +5,12 @@ RSpec.describe Order, type: :model do
     @order = FactoryBot.build(:order)
   end
 
+  context '内容に問題がない場合'do
+    it "tokenがあれば保存ができること" do
+      @order = FactoryBot.build(:order)
+      expect(@order).to be_valid
+    end
+  end
   context '内容に問題がある場合' do
     it "tokenが空では登録できないこと" do
       @order.token = nil

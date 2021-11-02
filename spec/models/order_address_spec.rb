@@ -1,15 +1,13 @@
 require 'rails_helper'
-RSpec.describe Address, type: :model do
-  before do
-    @address = FactoryBot.build(:address)
-  end
 
+RSpec.describe OrderAddress, type: :model do
+  before do
+    @order_adress = FactoryBot.build(:order_address)
+  end
   describe '商品購入機能' do
     context '購入できる時' do
-      it '全ての項目が入力されていれば保存できる' do
-        expect(@address).to be_valid
-      end
       it '建物名がなくても保存できる' do
+        @address = FactoryBot.build(:address)
         @address.building = ''
         @address.valid?
         expect(@address.errors.full_messages)
