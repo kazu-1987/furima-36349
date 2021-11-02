@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :item do
+    id {'1'}
     user_id { '1' }
     item_name { '柑橘' }
     description              { '酸っぱい' }

@@ -9,6 +9,9 @@ RSpec.describe OrderAddress, type: :model do
 
   describe '商品購入機能' do
     context '購入できる時' do
+      it '全ての項目が入力されていれば購入できる' do
+        expect(@order_address).to be_valid
+      end
       it '建物名がなくても保存できる' do
         @order_address.building = ''
         @order_address.valid?
