@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :create]
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update]
   before_action :set_item, only: [:show, :edit, :update]
-
+  before_action :move_to_index, only: [:edit]
   def index
     @items = Item.all
-    @items = @items.order("id desc")
+    @items = Item.order("created_at DESC")
   end
 
   def new
@@ -24,12 +24,14 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless current_user.id == @item.user_id
+    if current_user.id != @item.user.id
+      redirect_to action: :index
+    end
   end
 
   def update
     if @item.update(item_params)
-      redirect_to item_path
+      redirect_to root_path
     else
       render :edit
     end
@@ -48,14 +50,13 @@ class ItemsController < ApplicationController
                                  :delivery_day_id, :price).merge(user_id: current_user.id)
   end
 
-  def ensure_current_user
-    item = Item.find(params[:id])
-    if product.user_id != current_user.id
-      redirect_to action: :index
-    end
-  end
-
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_to_index
+    if @item.order != nil
+      redirect_to root_path
+    end
   end
 end
