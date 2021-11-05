@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, confirmation: true
   validates :encrypted_password, presence: true
-  validates :encrypted_password, :password, length: { minimum: 6 }, format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{7,}/ }
+  validates :encrypted_password, :password, length: { minimum: 5 }, format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}/ }
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :first_name_kana, presence: true
